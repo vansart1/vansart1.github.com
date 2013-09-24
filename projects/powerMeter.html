@@ -63,11 +63,22 @@
     <hr>
         <h4>The Remote Terminal Unit (RTU):</h4>
         <p>
-            Conventional piston engines running on gasoline pollute the atmosphere and further the current energy crisis. Modifying cars to run on the wankel rotary engine powered by Compressed Natural Gas (CNG) would serve to reduce the impact of cars on the environment as well as help to resolve the energy crisis. The purpose of this experiment is to convert a wankel engine to run on CNG and compare the emissions of the engine running on gasoline and CNG.
+            A Remote Terminal Unit or RTU is microprocessor-based device which aggregates the data from various power meters in the field before sending the data through the internet to a central database for further analysis. However, the cost of commercially available RTU is above $3,000 which makes smart sub-metering projects expensive to install. SourceOne is looking into creating its own RTU system using open source microcontroller hardware such as the arduino, netduino, or raspberry pi to drastically reduce the cost of an RTU.
+        </p>
+        <p>
+            The idea behind the RTU is to use an arduino microcontroller to communicate with up to 16 meters in the field using the MODBUS RTU protocol through RS485 serial communications. The RS485 communication would allow the microcontroller to read metering data from meters over 300 feet away. The arduino would serve as a secondary unit, which would be controlled by primary unit such as the netduino or Raspberry Pi. The netduino would then communicate via Ethernet to a central server where the energy data would be stored and analyzed. An arduino is needed to communicate with the meters via MODBUS RTU because the netduino and raspberry pi cannot react fast enough (the timing tolerances for MODBUS RTU is at the microsecond level).
         </p></br>
         <h4>The Power Meter</h4>
         <p>
-            CNG is a cleaner burning fuel and I hypothesize that once the engine is set up to run on natural gas, the emissions will be much less than when the engine was running on 93 Octane Gasoline.
+            Although we have not yet built this RTU, I built a meter simulator using an arduino and netduino. The idea behind building a meter simulator is that in order to properly build the RTU, we will need multiple meters. However, commercial meters are expensive and creating a meter simulator allows flexibility. For example, the simulator can have a multiplier in the code so that even though it is actually measuring small loads, it can simulate the large loads of an industrial facility. The simulator works using an arduino which uses a current transformer (CT) sensor to measure the current and an unregulated 9V AC-AC power supply to measure the voltage (without worrying about dangerous mains voltage levels). The signals from the CT sensor and 9V power supply then go through a simple circuit to change the voltage levels into a 0 to 5 volt signal so that the signals can be interpreted by the arduino. The arduino then calculates the current, voltage, apparent power, real power, power factor, runtime, and energy usage in kWh and outputs this data to an LCD screen. The netduino primary unit then periodically asks the arduino for its data and publishes this data on the internet. The picture below shows the meter simulator running as well as the data being published on the internet. 
+        </p></br>
+        <h4>Useful Links</h4>
+        <p>
+            <ul>
+                <li><a href="http://openenergymonitor.org/emon/buildingblocks/ct-sensors-interface">Using arduino to read current from CT sensor</a>
+                <li><a href="http://openenergymonitor.org/emon/buildingblocks/measuring-voltage-with-an-acac-power-adapter">Using arduino to read voltage from AC-AC power adapter</a>
+                <li><a href="http://openenergymonitor.org/emon/buildingblocks/how-to-build-an-arduino-energy-monitor">Using arduino to create a power meter</a>
+            </ul>
         </p></br>
 </div>
 </div>
