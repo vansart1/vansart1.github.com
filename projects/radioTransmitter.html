@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+
+    <title>Victor</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+      <script src="../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Victor Ansart</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li> <a href="../index.html">Home</a></li>
+            <li><a href="../aboutMe.html">About Me</a></li>
+            <li class="active" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="powerMeter.html">Power Meter</a></li>
+                <li class="active"><a href="radioTransmitter.html">Radio Transmitter</a></li>
+                <li><a href="wankel.html">Wankel Engine Conversion</a></li>
+
+                <!--
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+                -->
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+
+<div class="container">
+<div class ="text">
+    </br></br></br>
+    <p><h2><strong>Analog Radio Transmitter</strong></h2></p>
+    <hr>
+        <h4>Introduction</h4>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    The purpose of this experiment was to implement a Colpitt Oscillator and then use that oscillator to create a modulator to transmit an RF signal. We also gained further practice with LTSpice, bread boarding, and soldered our final projects. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThis lab also taught me how to create a new type of oscillator using an inductor, which made it a type of oscillator that we had not yet designed or used in lab. This type of oscillator uses resistances to bias a BJT transistor and an inductor and two capacitances in series to determine the frequency. The equation for the frequency is wo=((C1+C2)/(C1*C2*L))^.5, where wo=2*π*f. The feedback circuit that causes the circuit to oscillate is the combination of the inductor with the two series connected capacitors. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThis oscillator was then used as a carrier frequency for the modulator and transmitter that was built   in the second part of the lab. The modulator that we built in lab uses a transistor to add the signals coming from oscillator to the audio signal coming in. The signal from the oscillator comes into the base of the first transistor (biased in common emitter configuration) to modulate the collector current. However, the collector current was also being varied by the second transistor which is wired below the first. This second transistor used the incoming audio signal to modulate the current going through both transistors. Because the current in the first transistor is being modified by the second transistor and by the oscillating voltage at the gate, the current at the collector of the first transistor represents the sum of the two currents. The sum of these two signals is then sent to an antennae circuit so that the signal could be transmitted. The transmitted signal was then listened to using an ordinary radio tuned to the same frequency as the carrier frequency. 
+
+            </p></br>
+        <h4>Materials</h4>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThe materials used to create the oscillator were a breadboard, two 1 mH inductors (which are put together to form a 500 uH inductor), a 10 uF, 1 nF, 95 pF, 475 pF capacitors, a 9-90 pF variable capacitor, 1-10 K ohm potentiometer, 470 ohm, 39 ohm, 16 ohm resistor, 2N3704 NPN transistor, prototype board and, soldering iron, solder, oscilloscope, function generator, and power source.
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThe materials used to create the modulator and transmitter were a breadboard, two 1 mH inductors (which are put together to form a 500 uH inductor), 400 uF capacitor with a ferrite core, a 10 uF, 90 pF, 1.6 uF, 1 uF, 790 uF, 53 nF capacitors, 9-90 pF capacitor, two 100k ohm potentiometers, 18 k, 23 k, 29k, 15k, 1k, 2.1k ohm resistors, two 2N3704 NPN transistors, prototype board, solder, iron, oscilloscope, function generator, and power source.
+            </p></br>
+        <h4>Procedure</h4>
+        <h5><strong>Part 1: Oscillator</strong></h5>
+        <img src="img/radio/fig1.png" alt="colpitt oscillator" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 1: Colpitt Oscillator Circuit</strong></p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspBefore the circuit in Figure 1 could be implemented, a number of values had to be calculated. The collector current had to be 1 mA and the parallel combination of R1 and R2 had to be 12 k ohm. Details about these calculations can be found in Figure 2 of Appendix A. Then a small signal analysis was conducted on the circuit in order to determine the value of C1 and C2. Details about these calculations can be found in Figure 1 and 2 of Appendix A. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspOnce the calculations were complete, the circuit was simulated in LTSpice. After building the schematic, various analyses were conducted on the circuit. The DC operating point of the circuit was found. A transient simulation was run while monitoring the collector voltage to determine the operation frequency of the oscillator. Then an FFT analysis was conducted on that voltage. Another FFT analysis was then conducted on the current through the inductor. Then the frequency of operation was determined by tuning the variable capacitor. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAfter the spice results were found, the circuit was implemented on a breadboard. After the circuit was built, the oscillation frequency was determined by monitoring the voltage at base node. Then an FFT analysis was run on that voltage. Finally the frequency of operation was found by tuning the variable capacitor. Finally, in order to make our circuits more permanent and reliable they were soldered to a prototype board. Measurements were then performed on the soldered circuit to ensure it worked properly.
+            </p></br>
+        <h5><strong>Part 2: Modulator and transmitter</strong></h5>
+            <img src="img/radio/fig2.png" alt="modulator and transmitter" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 2: Circuit Diagram of Modulator and Transmitter</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   In the second part of the lab, more hand calculations were conducted to find the values of the necessary components from the circuit in Figure 2 Details about all of these calculations can be found in Figure 3 of Appendix A. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Once the calculations were completed, the circuit was simulated in LTSpice. A 5 kHz signal was used as the input audio tone in the simulation. The current in Q1 was monitored to ensure the current was not too large. Then an FFT analysis was don’t on the collector current of the first transistor. Then the voltage at the collector of Q1 was measured to ensure the small signal amplitude was small enough to avoid distorting the signal. Finally, the current in Lant was measured.
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   After simulating in LTSpice the circuit was implemented on the breadboard. After the circuit was built, the modulated frequency was determined by monitoring the voltage at Lant. Then an FFT analysis was run on that voltage. Finally, in order to make our circuits more permanent and reliable they were soldered to a prototype board. Measurements were then performed on the soldered circuit to ensure it worked properly. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   With the real world implementation of the circuit, the carrier frequency input was fed a 1V peak 750 Hz sine wave and the audio input was fed a 2 V peak sine wave that varied from a frequency of 400 Hz to about 15 KHz. That was the range that we could audibly hear a signal being transmitted over the radio. When the audio and carrier signal were connected, two signal generators were used, one for each signal. The oscillator from part 1 was not used because the final version did not yield the exact desired value. Furthermore, the transmitter circuit was optimized for a carrier frequency of 750 kHz, so a 750 KHz wave was fed from one signal generator and a changing frequency signal was fed from the other input.
+            </p></br>
+        <h4>Procedure</h4>
+        <h5><strong>Part 1: Oscillator</strong></h5>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The inductors were measured and the first inductor values were: L1=1.0295mH, Q1=2.8098. For the second inductor, the values were: L2=1.0315mH, Q2= 2.8075. The results from the hand calculations for the missing values can be found below in Table 1.
+            </p></br>
+
+            <img src="img/radio/table1.png" alt="osc. circuit values" height: auto; class="img-responsive" class="img-rounded"><p><strong>Table 1:Calculated values for oscillator circuit</strong></p></br>
+            <img src="img/radio/fig3.png" alt="LTSpice Oscillator Circuit" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 3: LTSpice Oscillator Circuit</strong></p></br>
+
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The circuit in figure 3 was simulated in LTSpice. Its operating point can be found below in figure 4. It shows that the transistors were biased properly so that they are both in the active region of operation.
+            </p></br>
+            <img src="img/radio/fig4.png" alt="osc. operating point" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 4: Operating Point Information from LTSpice simulator of oscillator</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   After finding the DC operating point of the circuit, a transient analysis was performed to determine what the output signal frequency was. A graph of the signal can be found in figure 5. The output frequency of the signal was found to be 748 KHz which is very close to the desired value of 800 KHz. 
+            </p></br>
+            <img src="img/radio/fig5.png" alt="LTSpice osc. output" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 5: LTSpice output signal from oscillator</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then an FFT analysis was run on the voltage to find the magnitude of harmonic frequencies in the signal. This FFT analysis can be found in Figure 6, and the information regarding the magnitude of the peaks of the harmonics can be found in Table 2. 
+            </p></br>
+            <img src="img/radio/fig6.png" alt="LTSpice osc output FFT" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 6: FFT Analysis of output signal of oscillator in LTSpice</strong></p></br>
+            <img src="img/radio/table2.png" alt="peak harmonic freq from FFT" height: auto; class="img-responsive" class="img-rounded"><p><strong>Table 2: Peak harmonic frequencies from FFT and magnitudes at output voltage in LTSpice</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then an FFT analysis was run on the current flowing through the inductor and the peaks of the harmonics were found. This FFT analysis can be found in Figure 7, and data regarding the peaks of the harmonics can be found in table 3. 
+            </p></br>
+            <img src="img/radio/fig7.png" alt="LTSpice FFT of inductor current" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 7: FFT analysis of inductor current of LTSpice oscillator circuit</strong></p></br>
+            <img src="img/radio/table3.png" alt="Peak harmonic freq. from current FFT" height: auto; class="img-responsive" class="img-rounded"><p><strong>Table 3: Peak harmonic frequencies from FFT and magnitudes from inductor current</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then the variable capacitor was tuned from 9 to 90 pF (the value of the actual capacitor from the lab) and the frequency range was found to be from 748 KHz at 9pF to 544 KHz at 90 pF. This shows that the bandwidth of the signal was about 200 KHz using the tuning capacitor.
+            </p></br>
+            <img src="img/radio/fig8.png" alt="oscillator on proto-board" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 8: Picture of oscillator on proto-board</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   After performing the LTSpice analysis, the circuit was implemented on a breadboard, and then on a prototype board. An image of the circuit of the oscillator on the proto-board can be found in Figure 8 above. The output signal was measured on the oscilloscope and a graph of this can be found in Figure 9.
+            </p></br>
+            <img src="img/radio/fig9.png" alt="output from proto-board oscillator" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 9: Output signal of oscillator on proto-board</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then an FFT analysis was run on the signal to determine the frequency of the harmonics. A graph of this analysis can be found in figure 10 and a table describing the data regarding the magnitude of the peak harmonic frequencies can be found in table 4. The FFT analysis shows a slightly higher frequency than on the breadboard because the capacitances were optimized for the breadboard and not the proto-board which had different cross capacitances. 
+            </p></br>
+            <img src="img/radio/fig10.png" alt="FFT of proto-board output" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 10: FFT analysis of output signal of oscillator on the proto-board</strong></p></br>
+            <img src="img/radio/table4.png" alt="Peak harmonic freq. from proto-board FFT" height: auto; class="img-responsive" class="img-rounded"><p><strong>Table 4: Peak harmonic frequencies and magnitudes from FFT of proto-board oscillator</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The variable capacitor did not cause the oscillator to have a range of frequencies. Instead it would go from being in a state where there was no output at all to a state where a signal with a 810 KHz frequency was present. There was unfortunately no ability to tune the circuit frequency using the variable capacitor. Instead the frequency was gotten to 810 KHz on the breadboard because one capacitance, C1 was changed to optimize the frequency on the breadboard. 
+            </p> </br>
+        <h5><strong>Part 2: Modulator and transmitter</strong></h5>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Before creating the circuit, the values of various components had to be calculated. The values of these components can be found in table 5. The value of CC1 was calculated to be 159 pF, but that is the minimum value for the capacitor and coupling caps are more effective at blocking out DC voltages when they are around 1 uF or greater. The values of R6 and R7 were both set to about the same level in order to get the clearest signal across the radio and it was about 25 K ohm for both.
+            </p></br>
+            <img src="img/radio/table5.png" alt="values for transmitter" height: auto; class="img-responsive" class="img-rounded"><p><strong>Table 5: Calculated values for transmitter circuit</strong></p></br>
+            <img src="img/radio/fig11.png" alt="LTSpice circuit of mod. and trans." height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 11: LTSpice circuit of modulator and transmitter</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The oscillator was implemented in LTSpice using the circuit schematic above in Figure 11.In order to simulate the circuit, a carrier frequency of 750 kHz was used and a 2V input audio signal of was also used. Figure 12 below shows the current going through the collector of Q1. It shows that the modulating signal is at the right level. 
+            </p></br>
+            <img src="img/radio/fig12.png" alt="current at Q1 in LTSpice" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 12: Graph of current at collector Q1 in LTSpice simulation of modulator</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then an FFT analysis was conducted which can be found below in figure 13. It shows that there are two major peaks to this signal which are as expected. One at 5 KHz (from the audio input) and another at 750 KHz (the carrier frequency). The subsequent peaks are harmonics of the carrier frequency. 
+            </p></br>
+            <img src="img/radio/fig13.png" alt="FFT of Q1 current in LTSPice" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 13: FFT of current at collector in Q1 in LTSpice simulation of modulator</strong></p></br>  
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then the voltage at the collector of Q1 was measured to ensure that the small signal was small enough to avoid distorting the signal by changing the biasing of the transistors. The graph in figure 14 shows that the small signal was not very big and would not distort the signal because it varies between 9.05 and 8.96 volts.
+            </p></br>
+            <img src="img/radio/fig14.png" alt="voltage at Q1 of mod in LTSpice" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 14: LTSpice graph of voltage at collector of Q1 of modulator</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then the current in Lant was measured and it can be found in figure 15. It shows a healthy current because it varies from -.8 mA to .8 mA.
+            </p></br>
+            <img src="img/radio/fig15.png" alt="I in Lant of trans in LTSpice" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 15: LTSpice graph of current in Lant of transmitter</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   An FFT analysis was run on the current in Lant which can be found in figure 16. This graph shows a peak at 750 KHz as expected due to the carrier frequency. However, it also shows an inverse peak at 5 KHz. A peak was expected at 5 KHz, but it was not expected that it would be an inverse peak. However, the fact that there is a peak indicates that the signal is present. 
+            </p></br>
+            <img src="img/radio/fig16.png" alt="FFT of current in Lant of LTSpice trans." height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 16: LTSpice FFT of current in Lant of transmitter in LTSpice</strong></p></br>
+            <img src="img/radio/fig17.png" alt="transmitter on proto-board" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 17: Pictures of transmitter circuit on proto-board</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   After simulating the transmitter/modulator in LTSpice it was implemented on a breadboard to make sure it worked, and then it was implemented on a proto-board. A picture of the circuit on the proto-board can be found in figure 17 above. Then the voltage at the node between Cant and Lant was measured and can be found in figure 18. Figure 19 shows a graph of the same signal, but with a zoom on the frequency to better show the 750 KHz carrier frequency. The waveforms in both graphs show that the amplitude of the 750 KHz signal is being modulated by the 5 KHz input audio signal. 
+            </p></br>
+            <img src="img/radio/fig18.png" alt="V from Cant to Lant node of board trans" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 18: Graph of voltage at Cant to Lant node of transmitting on proto-board</strong></p></br>
+            <img src="img/radio/fig19.png" alt="zoomed in of above" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 19: Zoomed in graph of voltage at Cant to Lant node of transmitter on proto-board</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Then an FFT analysis was conducted on this signal and it can be found in figure 20. It shows that there is a major peak at 750 KHz and another at its harmonic of 1.5 MHz. 
+            </p></br>
+            <img src="img/radio/fig20.png" alt="FFT of V from Cant to Lant on proto. trans." height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 20: FFT of voltage at Cant to Lant node of transmitter on proto-board</strong></p></br>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   After verifying that all measured results made sense, we turned on a radio and set it to 750 KHz to see if we could hear the signal that we were transmitting though Lant. When the radio was close enough to the transmitter circuit, the input tones were clearly audible. The audio signal was also clearer when we listened to our transmitter when it was soldered to the proto-board rather than on the breadboard. Overall, we were able to make a working radio transmitter. 
+            </p></br>
+        <h4>Discussion</h4>
+        <h5><strong>Part 1</strong></h5>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The results from the LTSpice simulation showed that the oscillator was functioning correctly. When we ran the circuit with very similar values to what we obtained with the hand calculations, we were able to get the circuit to oscillate with a frequency of 748 kHz. This value is close to the desired value of 800 KHz, so we can assume that the results from the hand calculations were valid. When this circuit was implemented on the breadboard, it was not oscillating at the correct frequency. In order to get the oscillation close to 800 KHz, the value of C1 had to be altered. In order to get the oscillation to the desired value, a 27 pF capacitor was used for C1. Using this value for C1 allowed the circuit to oscillate at 810 kHz which is very close to the desired value of 800 kHz. When the circuit was implemented on the breadboard and on the proto-board, tuning the capacitor Ct had very little impact on the frequency. When Ct was set correctly, the circuit oscillated at a constant 800 KHz. When Ct was further turned, the oscillation frequency changed very little, and then the amplitude of the signal decreased until the output signal disappeared. Because of this, the only way to change the oscillation of the circuit was to change the value of C1 to 27 pF. One of the reasons why this had to take place is because all of the components used in the lab have a tolerance and do not behave exactly as they do in the models or the calculations. It is not exactly sure why tuning the capacitor Ct did not have an impact on frequency and caused the signal to disappear if turned too much. However, changing the value of C1 worked. And the rest of the circuit used very similar values to the LTSpice circuit and hand calculations. There is always a small discrepancy between the results obtained using LTSpice, the results obtained from calculations, and the values used in the real world because both the calculations and LTSpice uses models to approximate how real the real circuit will operate.
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The results from the LTSpice simulation showed that the oscillator was functioning correctly. When we ran the circuit with very similar values to what we obtained with the hand calculations, we were able to get the circuit to oscillate with a frequency of 748 kHz. This value is close to the desired value of 800 KHz, so we can assume that the results from the hand calculations were valid. When this circuit was implemented on the breadboard, it was not oscillating at the correct frequency. In order to get the oscillation close to 800 KHz, the value of C1 had to be altered. In order to get the oscillation to the desired value, a 27 pF capacitor was used for C1. Using this value for C1 allowed the circuit to oscillate at 810 kHz which is very close to the desired value of 800 kHz. When the circuit was implemented on the breadboard and on the proto-board, tuning the capacitor Ct had very little impact on the frequency. When Ct was set correctly, the circuit oscillated at a constant 800 KHz. When Ct was further turned, the oscillation frequency changed very little, and then the amplitude of the signal decreased until the output signal disappeared. Because of this, the only way to change the oscillation of the circuit was to change the value of C1 to 27 pF. One of the reasons why this had to take place is because all of the components used in the lab have a tolerance and do not behave exactly as they do in the models or the calculations. It is not exactly sure why tuning the capacitor Ct did not have an impact on frequency and caused the signal to disappear if turned too much. However, changing the value of C1 worked. And the rest of the circuit used very similar values to the LTSpice circuit and hand calculations. There is always a small discrepancy between the results obtained using LTSpice, the results obtained from calculations, and the values used in the real world because both the calculations and LTSpice uses models to approximate how real the real circuit will operate. 
+            </p>  
+            </br>  
+        <h5><strong>Part 2</strong></h5>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The LTSpice showed that the results from the calculations were valid because the circuit had the same or very similar values to the ones obtained in calculations, and the circuit was able to modulate a signal successfully. We could clearly see on the output a 750 KHz sine wave whose amplitude was being modulated by a 5 KHz wave. This proved that the circuit was functioning as desired in LTSpice. When the circuit was implemented on the breadboard, similar values were used as in the calculation and LTSpice simulation. When the circuit was powered on with Cant tuned to the correct capacitance of 113 pF, a constant tone was heard over the radio when the circuit was tuned to 750 KHz. This showed that the transmitter was modulating the signal and transmitting properly. Furthermore, when the voltage at Lant was measured, it was found to have a 750 KHz frequency and to have its amplitude modulated by the frequency that was being fed to the audio input. This shows that the breadboard implementation of the circuit was working correctly. 
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The LTSpice showed that the results from the calculations were valid because the circuit had the same or very similar values to the ones obtained in calculations, and the circuit was able to modulate a signal successfully. We could clearly see on the output a 750 KHz sine wave whose amplitude was being modulated by a 5 KHz wave. This proved that the circuit was functioning as desired in LTSpice. When the circuit was implemented on the breadboard, similar values were used as in the calculation and LTSpice simulation. When the circuit was powered on with Cant tuned to the correct capacitance of 113 pF, a constant tone was heard over the radio when the circuit was tuned to 750 KHz. This showed that the transmitter was modulating the signal and transmitting properly. Furthermore, when the voltage at Lant was measured, it was found to have a 750 KHz frequency and to have its amplitude modulated by the frequency that was being fed to the audio input. This shows that the breadboard implementation of the circuit was working correctly. 
+            </p>
+            </br>
+        <h4>Conclusion</h4>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Overall, it seems that the results from the lab were valid. For the first part of the lab, the results obtained from the LTSpice were very similar to those from the calculations. When the circuit was implemented in the real world, the value of C1 had to be changed to allow for variations between the real world and the modeled world. But we were able to get an output signal with frequency of 810 KHz. On the final soldered version, this frequency changed a little, but the results are still valid. The values from the calculations led to an oscillator that had a frequency relatively close to 800 kHz. Since the oscillator functions as desired, part 1 of the experiment can be considered a success.
+            </p>
+            <p>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Overall, it seems that the results from the lab were valid. For the first part of the lab, the results obtained from the LTSpice were very similar to those from the calculations. When the circuit was implemented in the real world, the value of C1 had to be changed to allow for variations between the real world and the modeled world. But we were able to get an output signal with frequency of 810 KHz. On the final soldered version, this frequency changed a little, but the results are still valid. The values from the calculations led to an oscillator that had a frequency relatively close to 800 kHz. Since the oscillator functions as desired, part 1 of the experiment can be considered a success.
+            </p>
+        
+        <hr>
+
+        <h4>Appendix Part A</h4>
+    </br>
+            <img src="img/radio/fig21.png" alt="hand calculations from part 1" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 21: Hand calculations from part 1 showing derivation of small signal in section 1, and the derivation of the frequency equations and stability conditions.</strong></p>
+        </br>
+            <img src="img/radio/fig22.png" alt="hand calculations from part 1 cont." height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 22: Hand calculations to find the missing values in the oscilloscope circuit in part 1</strong></p>
+        </br>
+            <img src="img/radio/fig23.png" alt="hand calculations from part 2" height: auto; class="img-responsive" class="img-rounded"><p><strong>Figure 23: Hand calculations from part 2 to find the missing component values for the transmitter circuit</strong></p>
+        </br>
+
+
+</div>
+</div>
+
+
+<div class = "container">
+<hr>
+    <p>
+        <a class="btn btn-default btn-sm" href="downloads/radio/analog-radio-transmitter-lab.pdf" target="_blank">Download Lab Report &raquo;</a>
+    </p>
+ 
+</div>
+
+
+    <div class="container">
+      <hr>
+      <footer>
+        <p><small>&copy; Victor Ansart 2013</small></p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery-1.10.2.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
