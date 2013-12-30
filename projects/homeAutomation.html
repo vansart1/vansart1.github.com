@@ -66,13 +66,29 @@
     <hr>
         
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I designed a home automation system to control the lights and temperature using a netduino micrcontroller. One of the strengths of this system is its ability to be controlled via various methods. The box housing the electronics has four buttons which can be used to control the lights or adjust the set temperature. The lights and temperature can also be adjusted by visiting the the website or using RF controllers located around the room.
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I designed a home automation system to control the lights and temperature using a netduino micrcontroller. One of the strengths of this system is its ability to be controlled via various methods. The lights and temperatue can be adjusted by using buttons located on the box housing the electronics, by using RF contollers located around the room, or by connecting to the control webserver.
         </p>
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The home automation system also outputs the results of which lights are on and the current room temperature on its website. The box housing the electronics also contains LCD display that either shows the current date and time, or the current room temperature. The date and time are very accurate as it is regularly fetched and updated from a timeserver. 
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The home automation website is not only used for control, but it also shows which lights are on and the current room temperature. The box housing the electronics also contains an LCD display that either shows the current date and time, or the current room temperature. A RGB LED is also used to visually show if the current temperature is above or below the set temperature. Because the netduino's clock is slightly innacurate, the time is regularlay fetched from a timeserver to ensure the exact time is always displayed.
+        </p>
+        <p>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The system uses mutlithreading to keep the webserver separate from the rest of the system. That way, if the webserver crashes for some reason, the rest of the automation system can keep on running. Timer interrupts are used to regularly check the room temperature, to edit the LCD display and RGB LED, to ensure accurate time, and to write temperature data to an SD card. 
         </p></br>
   
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <img src="img/homeAutomation/automation-running.png" height: auto; class="img-responsive" class="img-rounded">
+            <p>Figure 1: Running Home Automation System</p>
+        </div>
+        <div class="col-sm-4">
+            <img src="img/homeAutomation/automation-internet.png" height: auto; class="img-responsive" class="img-rounded">
+            <p>Figure 2: Results over the internet</p>
+        </div>
+        <div class="clearfix visible-xs"></div>
+    </div>
+</div>
 
 
 <div class = "container">
@@ -86,7 +102,7 @@
     <div class="container">
       <hr>
       <footer>
-        <p><small>&copy; Victor Ansart 2013</small></p>
+        <p><small>Copywright &copy; Victor Ansart 2014</small></p>
       </footer>
     </div> <!-- /container -->
 
