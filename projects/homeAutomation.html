@@ -69,7 +69,7 @@
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I designed a home automation system to control the lights and temperature using a netduino micrcontroller. One of the strengths of this system is its ability to be controlled via various methods. The lights and temperatue can be adjusted by using buttons located on the box housing the electronics, by using RF contollers located around the room, or by connecting to the control webserver.
         </p>
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The home automation website is not only used for control, but it also shows which lights are on and the current room temperature. The box housing the electronics also contains an LCD display that either shows the current date and time, or the current room temperature. A RGB LED is also used to visually show if the current temperature is above or below the set temperature. Because the netduino's clock is slightly innacurate, the time is regularlay fetched from a timeserver to ensure the exact time is always displayed.
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The home automation website is not only used for control, but it also shows the current status of the lights and the room temperature. The box housing the electronics also contains an LCD display that either shows the current date and time, or the current room temperature. A RGB LED is also used to visually show if the current temperature is above or below the set temperature. Because the netduino's clock is slightly innacurate, the time is regularlay fetched from a timeserver to ensure the exact time is always displayed.
         </p>
         <p>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The system uses mutlithreading to keep the webserver separate from the rest of the system. That way, if the webserver crashes for some reason, the rest of the automation system can keep on running. Timer interrupts are used to regularly check the room temperature, to edit the LCD display and RGB LED, to ensure accurate time, and to write temperature data to an SD card.  
@@ -78,11 +78,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8">
-            <img src="img/homeAutomation/automation-running.png" height: auto; class="img-responsive" class="img-rounded">
+        <div class="col-sm-6">
+            <img src="img/homeAutomation/automation-running.jpg" height: auto; class="img-responsive" class="img-rounded">
             <p>Figure 1: Running Home Automation System</p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <img src="img/homeAutomation/automation-internet.png" height: auto; class="img-responsive" class="img-rounded">
             <p>Figure 2: Results over the internet</p>
         </div>
