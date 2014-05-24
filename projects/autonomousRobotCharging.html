@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+
+    <title>Victor</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+      <script src="../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">Victor Ansart</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li> <a href="../index.html">Home</a></li>
+            <li><a href="../aboutMe.html">About Me</a></li>
+            <li class="active" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="autonomousRobotCharging.html">DTN for Autonomous Robot Charging</a></li>
+                <li><a href="homeAutomation.html">Home Automation</a></li>
+                <li><a href="electronicEmissions.html">Emissions from Electronics</a></li>
+                <li><a href="powerMeter.html">Power Meter</a></li>
+                <li><a href="radioTransmitter.html">Radio Transmitter</a></li>            
+                <li><a href="wankel.html">Wankel Engine Conversion</a></li>            
+                <!--
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+                -->
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+<div class="container">
+  <div class="text">
+     </br></br></br>
+          <p><h2><strong>Delay Tolerant Network for Autonomous Robotic Vehicle Charging</strong></h2></p>
+          <hr>
+          <h3>Overview</h3>
+  
+
+
+   <div class="row">
+    <div class="col-sm-8">
+         
+              <p>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   For my Senior Design Project at Tufts University, I teamed up with Tolga Zeybek and Gerad Denoyer in the Tufts Wireless Labs. We created a robot that could autonomously find a charging station when it was running low on batteries using a Delay Tolerant Network. Our goal was to have a robot go by a charging station and relay the coordinates of the station to another bot that was running low on batteries. Then the robot running low on batteries would navigate to the charging station to recharge itself. 
+              </p>
+            
+              <p>
+                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The bots communicate with each other using a Delay Tolerant Netowrk (DTN). A Delay Tolerant Network is a communication system that does not rely on modern communication systems such as wifi, 4G, or cell networks. Instead, whenever a node of a DTN comes within range of another node, the two swap relevant data with each other. In this way information can be spread throughout the network. In our system, we created a few different types of nodes. The charging station nodes are placed in charging stations and contain the GPS location of the station. The vehicular nodes are placed in robotic vehicles and are used to relay the charging station coordinates. Information nodes are placed along the roadside to relay roadside hazards and general road conditions. The graduate students of Tufts Wireless Labs also developped gateway nodes to send the information from the DTN network to the general internet.
+              </p>
+
+            </br>
+     </div>
+
+     <div class="col-sm-4">
+        <img src="img/autonomousRobotCharging/fig1.jpg" height: auto; class="img-responsive" class="img-rounded">
+        <p>Figure 1: Picture of Autonomous Robotic Vehicle</p>
+     </div>
+   </div>
+  
+
+  
+      <p>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Once a robot that is running low on batteries obtains the GPS coordinates of a charging station it will calculate the shortest path to the station and begin driving in that direction. The robot uses ultrasonic sensors placed around the robot and a navigation algorithm to prevent the robot from running into objects as it navigates to its final destination. Once the robot gets within 15 feet of the charging station, it stops relying on GPS and uses an image detection algorith to finalize navigation. This process is shown in Video 1 below. In the video, the robot can be seen rotating around as it looks for the identifying pattern on the charging station. Once the image detection algorithm sees the pattern, the bot rotates until the pattern is straight ahead. Then the bot communicates with the station through the DTN to activate the station (in the video this is shown by having the red LED's turn on to indicate that the station is active and the charging connection is hot). Finally, the bot begins driving forward until the bot contacts the charging station and charging begins. Once the robot is sufficiently charged, it backs away from the charging station, communicates via DTN to turn the charging station off, and continues on its original destination. 
+      </p> 
+    </br>
+
+
+
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <iframe width="560" height="315" src="http://www.youtube.com/embed/RDlEVXJwe34?rel=0" frameborder="0" allowfullscreen></iframe>
+            <p>Video 1: Robot finding charging station and recharging itself </p>
+        </div>
+        <div class="col-sm-6">
+            <iframe width="560" height="315" src="http://www.youtube.com/embed/dMkIMPoDqQM?rel=0" frameborder="0" allowfullscreen></iframe>
+            <p>Video 2: Image detection algorithm finding identifying pattern </p>
+        </div>
+        <div class="clearfix visible-xs"></div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="text">
+  </br>
+  <h3>Abstract</h3>
+          <p>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Autonomous robotic vehicles are getting increasingly popular. Uses for these vehicles include operations in remote areas where access to a structured network may be unavailable, making reliable communication an issue. Limited battery power of these vehicles is another issue that impairs their ability to perform autonomous duties for
+  extended time periods. We propose a new delay-tolerant-network (DTN) topology that allows the vehicles seamlessly communicate with each other and additional nodes, and a novel autonomous charging system utilizing our network to solve the problem of limited battery power for extended autonomous duties. We designed a cost-effective, heterogeneous, ad-hoc DTN to carry and relay information between robotic vehicles, charging stations and additional nodes, where nodes can collect and store data from each other to relay to additional nodes. Furthermore, we developed an automated charging process, where autonomous robotic vehicles collect, share, and store information about the charging stations they have encountered using our DTN network. When the vehicles need charging, they use the data stored in their memory to autonomously navigate to the charging stations and connect with them using image detection to charge their batteries, eliminating any need for outside intervention. To demonstrate the autonomous charging process, we prototyped two autonomous robotic vehicles controlled by smartphones. These smartphones run a custom Android application we developed to perform wireless communication over DTN using the ZigBee protocol. The vehicles navigate autonomously using GPS and on board ultrasonic distance sensors, and precisely connect to charging stations by using the smartphone camera to detect specific patterns. Additionally, we built a prototype charging station that also acts as a gateway between our DTN and the Internet. We had partial success with the entire project where the individual parts worked, but the integrated did not properly work as a whole. 
+          </p>
+
+  </br>
+  <h3>Project Video</h3>
+
+
+          <p> <iframe width="853" height="480" src="http://www.youtube.com/embed/JqehHRiXo_c?rel=0" frameborder="0" allowfullscreen></iframe> </p>
+          <p> Video 3: Project Video </p>
+
+
+  </div>
+</div>
+
+<div class = "container">
+<hr>
+    <p>
+        <a class="btn btn-default btn-sm" href="downloads/autonomousRobotCharging/Report-DTN_for_autonomous_vehicle_charging.pdf" target="_blank">Download Report &raquo;</a>
+    </p>
+        <p>
+        <a class="btn btn-default btn-sm" href="downloads/autonomousRobotCharging/Presentation-DTN_for_autonomous_vehicle_charging.pdf" target="_blank">Download Presentation &raquo;</a>
+    </p>
+        <p>
+        <a class="btn btn-default btn-sm" href="downloads/autonomousRobotCharging/Poster-DTN_for_autonomous_vehicle_charging.pdf" target="_blank">Download Poster &raquo;</a>
+    </p>
+
+</div>
+
+    <div class="container">
+      <hr>
+      <footer>
+        <p><small>Copyright &copy; Victor Ansart 2014</small></p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery-1.10.2.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
