@@ -65,15 +65,37 @@
     </br></br></br>
     <p><h2><strong>Home Automation System</strong></h2></p>
     <hr>
-        
+        <h4>Overview</h4>
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I designed a home automation system to control the lights and temperature using a netduino micrcontroller. One of the strengths of this system is its ability to be controlled via various methods. The lights and temperatue can be adjusted by using buttons located on the box housing the electronics, by using RF contollers located around the room, or by connecting to the control webserver.
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I designed a home automation system to control the lights and temperature in my room using a netduino microcontroller. One of the main strengths of this system is its ability to turn on the lights and AC (or heat) in my room as I enter my house. The system can also be controlled using a webserver which allows the user to see the various connected devices (lights, AC, heating, temperature) and their status. In order to further simplify life for the user, the system can also be accessed through RF remote controls or by using the buttons on the base-station. The base-station has an LCD display and RGB LED to give the user information about the status of the various devices.
+        </p></br>
+        <h4>Technical Details</h4>
+        <p>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   In order to sense whether I am at home or not, I look to see whether my cell phone is connected to the wifi network. In order to do this, I use a Raspberry Pi to check my home router’s connected devices page to see whether my cell phone is actively connected. The Raspberry Pi then sends an http request to the netduino to let it know whether the cell phone is present or not. This http request is interpreted by the webserver and the automation system uses this information to determine whether the user is arriving, present, or away from home.
         </p>
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The home automation website is not only used for control, but it also shows the current status of the lights and the room temperature. The box housing the electronics also contains an LCD display that either shows the current date and time, or the current room temperature. A RGB LED is also used to visually show if the current temperature is above or below the set temperature. Because the netduino's clock is slightly innacurate, the time is regularlay fetched from a timeserver to ensure the exact time is always displayed.
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The webserver is also used to interface with the connected devices such as the lights, AC, and heat and to see their status. It also displays the current temperature and allows the user to change the desired temperature. The webserver is secured by using a specific URL to access the home automation system. Without knowing the complete URL, the webserver will not respond to the request. Furthermore, in my setup, the webserver is on the local network. In order to access it remotely, a VPN into the local network is needed. My Raspberry Pi also runs an OpenVPN server, which allows me to remotely control my home automation system. (Please see useful links section below for more information on setting up an OpenVPN on the Raspberry Pi).
         </p>
         <p>
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The system uses mutlithreading to keep the webserver separate from the rest of the system. That way, if the webserver crashes for some reason, the rest of the automation system can keep on running. Timer interrupts are used to regularly check the room temperature, to edit the LCD display and RGB LED, to ensure accurate time, and to write temperature data to an SD card.  
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   The system can also be accessed locally using either the RF remote controls or by using buttons on the base-station. An LCD display on the base-station will alter between showing the date and time and temperature settings. In order to accurately show the time, the system checks a NTP time server at startup to obtain the exact time. An RGB LED on the base-station also shows a visual indication of whether the actual room temperature is above or below the desired temperature. 
+        </p>
+        <p>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Since the system uses a lot of different modules, multi-threading is used to keep each task separate. This allows the rest of the system to continue functioning even if one the threads crash. The various threads in the system are: the main thread which starts up the program, a webserver thread, a thread to check whether buttons had been pressed on the base-station, a thread to update the LCD display and RGB LED, and a thread to check whether the lights, AC, or heat should be on or off. 
+        </p></br>
+        <h4>The Hardware</h4>
+        <p>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   I use a Netduino Plus 2 as the brains of my home automation system. The netduino is in charge of running the automation system as well as providing a webserver. The Raspberry Pi used in this setup is only used to check to see whether the phone is connected to the network. It should possible to check for the presence of the phone in the network using only the netduino, but this was causing reliability issues so this function was ported to the Raspberry Pi. 
+        </p>
+        <p>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   In order for the RF remote control to work, an RF receiver is located in the base-station. The netduino reads the result from the RF receiver or buttons on the base-station to respond to the user using the LCD and RGB LED. Then the lights, AC, and heat are switched on and off using relays that are wired to the base-station. Future versions of this project will include wireless relays to extend the range of this system outside of my dorm room. 
+        </p></br>
+        <h4>Useful Links</h4>
+         <p>
+          <ul>
+                <li><a target="_blank" href="http://basbrun.com/2011/02/21/netduino-plus-part-2/">Guide to multi-threading, interrupts, timers, and file I/O on the netduino</a>
+                <li><a target="_blank" href="http://readwrite.com/2014/04/10/raspberry-pi-vpn-tutorial-server-secure-web-browsing#awesm=~oFwNsvYSZtfyFk">Tutorial to set up OpenVPN on Raspberry Pi</a>
+                <li><a target="_blank" href="https://github.com/bradygaster/Tenz-2013-Internet-of-Things-With-Windows-Azure/blob/master/AzureMicroHelpers/NTP/NtpClient.cs">Code for obtaining time and date from NTP Time Server in C#</a>
+            </ul>  
         </p></br>
   
 
