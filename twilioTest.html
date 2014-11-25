@@ -1,5 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="alice">
-     Hello mate. Twilio does the wilio!
-  </Say>
+      <Gather timeout="10" finishOnKey="#">
+        <Say>
+            Please enter your number number,
+            followed by the pound sign
+        </Say>
+    </Gather>
+    <Say>We didn't receive any input. Goodbye!</Say>
 </Response>
